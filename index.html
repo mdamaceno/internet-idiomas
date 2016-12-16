@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Internet Idiomas</title>
+    <!-- Global stylesheets -->
+    <link href="src/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="src/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="src/assets/css/core.min.css" rel="stylesheet" type="text/css">
+    <link href="src/assets/css/components.min.css" rel="stylesheet" type="text/css">
+    <link href="src/assets/css/colors.min.css" rel="stylesheet" type="text/css">
+    <!-- /global stylesheets -->
+    <script type="text/javascript" src="src/assets/js/plugins/loaders/pace.min.js"></script>
+    <script type="text/javascript" src="src/assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="src/assets/js/core/libraries/bootstrap.min.js"></script>
+    <script type="text/javascript" src="src/assets/js/plugins/loaders/blockui.min.js"></script>
+    <script type="text/javascript" src="src/assets/js/plugins/ui/nicescroll.min.js"></script>
+    <script type="text/javascript" src="src/assets/js/plugins/ui/drilldown.js"></script>
+    <script type="text/javascript" src="src/assets/js/core/app.js"></script>
+    <script type="text/javascript" src="src/assets/js/plugins/ui/ripple.min.js"></script>
+</head>
+
+<body class="layout-boxed">
+    <!-- Main navbar -->
+    <div class="navbar navbar-inverse bg-slate-800">
+        <div class="navbar-boxed">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" v-on:click.prevent=""><img src="src/assets/images/internet-idiomas-logo.png" alt=""></a>
+                <ul class="nav navbar-nav pull-right visible-xs-block">
+                    <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+                </ul>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-mobile">
+                <ul class="nav navbar-nav">
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /main navbar -->
+    <div class="page-container">
+        <div class="page-content">
+            <div class="content-wrapper" id="app">
+                <div class="row" v-if="control.showChannelList">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" v-model="search" class="form-control" placeholder="Filtro">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" v-if="control.showChannelList">
+                    <div class="col-lg-4" v-for="channel in channels">
+                        <div class="panel panel-flat">
+                            <div class="panel panel-body card-channel">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a v-bind:href="'#'+channel.id" v-on:click="clickChannel(channel)" data-popup="lightbox">
+                                            <img v-bind:src="getAvatar(channel)" style="width: 70px; height: 70px;" class="img-circle" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading"><strong>{{channel.title}}</strong></h6>
+                                        <p class="text-muted">Ensina {{channel.teaching}}
+                                            <br>Vídeos em {{channel.language}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" v-else>
+                    <div class="col-md-12">
+                        <div class="panel panel-flat">
+                            <div class="panel panel-body">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a v-bind:href="'/#'+control.selectedChannel.id">
+                                            <img v-bind:src="getAvatar(control.selectedChannel)" style="width: 70px; height: 70px;" class="img-circle" v-bind:alt="control.selectedChannel.title" v-bind:title="control.selectedChannel.title">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h1 class="media-heading">{{control.selectedChannel.title}}</h1>
+                                        <p>Ensina <span class="text-bold">{{control.selectedChannel.teaching}}</span>
+                                            <br>Vídeos em <span class="text-bold">{{control.selectedChannel.language}}</span></p>
+                                    </div>
+                                </div>
+                                <h4><i class="icon-feed2"></i> Últimos vídeos</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th width="1"></th>
+                                                <th width="1"></th>
+                                                <th>Título</th>
+                                                <th>Publicado em</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-resource/dist/vue-resource.js"></script>
+    <script src="./src/avatar.js"></script>
+    <script src="./src/videoid.js"></script>
+    <script src="./src/app.js"></script>
+</body>
+
+</html>
